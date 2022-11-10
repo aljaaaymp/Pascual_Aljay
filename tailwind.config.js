@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        Inter: "'Inter', 'sans-serif'",
+        kanit: ['Kanit', 'sans-serif'],
       },
       keyframes: {
         entrance: {
@@ -30,8 +30,12 @@ module.exports = {
           "100%": { transform: "translateX(130px)" },
         },
         close: {
-          "0%": { transform: "rotate(0)"},
-          "100%": { transform: "rotate(-360deg)"},
+          "0%": { transform: "rotate(0)" },
+          "100%": { transform: "rotate(-360deg)" },
+        },
+        scaleCenter: {
+          "0%": { transform: "scale(1)" },
+          "100%": { transform: "scale(0.5)" },
         },
       },
       animation: {
@@ -40,6 +44,7 @@ module.exports = {
         close: "close 1s ease 0s 1 normal forwards",
         "left-to-right": "leftToRight 3s ease-in-out infinite",
         fill: "fill 2s ease 0s 1 normal forwards",
+        "scale-center": "scaleCenter 1s ease 0s 1 normal forwards",
       },
     },
   },
