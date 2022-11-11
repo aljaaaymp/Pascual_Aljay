@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Pascual_Aljay/static/css/main.01102bd0.css",
-    "main.js": "/Pascual_Aljay/static/js/main.b2721cab.js",
+    "main.css": "/Pascual_Aljay/static/css/main.d8c308ed.css",
+    "main.js": "/Pascual_Aljay/static/js/main.36f433bc.js",
     "static/js/227.63a4b981.chunk.js": "/Pascual_Aljay/static/js/227.63a4b981.chunk.js",
     "static/js/526.369ddfc5.chunk.js": "/Pascual_Aljay/static/js/526.369ddfc5.chunk.js",
     "static/js/232.2ab67488.chunk.js": "/Pascual_Aljay/static/js/232.2ab67488.chunk.js",
@@ -10,16 +10,17 @@
     "static/media/jchag2.PNG": "/Pascual_Aljay/static/media/jchag2.d6224e7197c31ff71595.PNG",
     "static/media/ISBN.PNG": "/Pascual_Aljay/static/media/ISBN.58bf2250cb5cb06f9f22.PNG",
     "static/media/PAS.PNG": "/Pascual_Aljay/static/media/PAS.cbf8056eed0913b3acf0.PNG",
+    "static/media/Pascual, Aljay_Java Developer.pdf": "/Pascual_Aljay/static/media/Pascual, Aljay_Java Developer.0973d6c9b696b320765b.pdf",
     "index.html": "/Pascual_Aljay/index.html",
-    "main.01102bd0.css.map": "/Pascual_Aljay/static/css/main.01102bd0.css.map",
-    "main.b2721cab.js.map": "/Pascual_Aljay/static/js/main.b2721cab.js.map",
+    "main.d8c308ed.css.map": "/Pascual_Aljay/static/css/main.d8c308ed.css.map",
+    "main.36f433bc.js.map": "/Pascual_Aljay/static/js/main.36f433bc.js.map",
     "227.63a4b981.chunk.js.map": "/Pascual_Aljay/static/js/227.63a4b981.chunk.js.map",
     "526.369ddfc5.chunk.js.map": "/Pascual_Aljay/static/js/526.369ddfc5.chunk.js.map",
     "232.2ab67488.chunk.js.map": "/Pascual_Aljay/static/js/232.2ab67488.chunk.js.map",
     "237.b2c7a1ef.chunk.js.map": "/Pascual_Aljay/static/js/237.b2c7a1ef.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.01102bd0.css",
-    "static/js/main.b2721cab.js"
+    "static/css/main.d8c308ed.css",
+    "static/js/main.36f433bc.js"
   ]
 }
