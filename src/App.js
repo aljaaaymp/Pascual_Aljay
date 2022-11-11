@@ -8,7 +8,7 @@ import { IoLogoCss3 } from "react-icons/io";
 import { FaNetworkWired } from "react-icons/fa";
 import { RiComputerLine } from "react-icons/ri";
 import { CiLocationOn } from "react-icons/ci";
-
+import resume from "../src/images/Pascual, Aljay_Java Developer.pdf";
 import {
   AiFillCloseCircle,
   AiOutlinePhone,
@@ -96,6 +96,10 @@ function App() {
     } else {
       control.start("hidden2");
       setIsClick2(false);
+      setBackEnd(false);
+      setFrontEnd(false);
+      setComputer(false);
+      setNetwork(false);
     }
   }, [control, inView2]);
 
@@ -162,13 +166,25 @@ function App() {
           </div>
           <p className="font-semibold text-xl">Software Engineer</p>
           <p className="tracking-widest z-10">
-            An ambitious and self-motivated web developer with a considerable
-            technical skill who possesses self-discipline and ability to work
-            with minimum of supervision. Able to play a key role in website
-            development to ensure maximum accessibility, user experience and
-            usability. A quick learner who can absorb new ideas and can
-            communicate clearly and effectively.
+            An ambitious and self-motivated software engineer with a
+            considerable technical skill who possesses self-discipline and
+            ability to work with minimum of supervision. Able to play a key role
+            in website development to ensure maximum accessibility, user
+            experience and usability. A quick learner who can absorb new ideas
+            and can communicate clearly and effectively.
           </p>
+          <a
+            href={resume}
+            download="Pascual_Aljay_CV"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <div className="pt-10">
+              <span className="bg-white bg-opacity-10 p-3 px-7 rounded-3xl text-xl">
+                get resume
+              </span>
+            </div>
+          </a>
         </div>
       </div>
 
@@ -337,7 +353,7 @@ function App() {
         <div
           className={
             isClick3
-              ? "text-white flex gap-2 px-5 md:px-20 flex-col w-screen md:w-1/2 animate-entrance "
+              ? "text-white flex gap-2  md:px-20 flex-col w-screen md:w-1/2 animate-entrance "
               : "hidden"
           }
         >
@@ -462,9 +478,9 @@ function App() {
               <AiFillCloseCircle size={80} />
             </div>
           </div>
-          <div className="flex flex-col  gap-10 py-5">
+          <div className="flex flex-col gap-2 md:gap-10 py-5">
             <div className="flex md:flex-row flex-col gap-2 md:gap-10">
-              <div className="h-32 w-96 bg-white bg-opacity-5 flex  justify-start px-10 items-center text-center rounded-xl hover:cursor-pointer">
+              <div className="h-32 w-96 bg-white bg-opacity-5 flex  justify-start px-10 items-center text-center rounded-xl">
                 <div className="bg-white bg-opacity-10 rounded-full">
                   <span>
                     <AiOutlinePhone size={50} className="p-1 text-blue-300" />
