@@ -180,13 +180,13 @@ function App() {
                 </div>
                 <p className="font-semibold text-xl">Software Engineer</p>
                 <p className="tracking-widest z-10">
-                  An ambitious and self-motivated software engineer with a
-                  considerable technical skill who possesses self-discipline and
-                  ability to work with minimum of supervision. Able to play a
-                  key role in website development to ensure maximum
-                  accessibility, user experience and usability. A quick learner
-                  who can absorb new ideas and can communicate clearly and
-                  effectively.
+                Java Developer with expertise in Java 11 and 17,
+                Agile methodologies, and AZ-900 Azure
+                Fundamentals certification. Proven experience in
+                SQL, CI/CD with Azure DevOps, and
+                specialization in insurance solutions. Committed
+                to ongoing learning and delivering efficient,
+                industry-aligned applications.
                 </p>
                 <a
                   href={resume}
@@ -263,8 +263,9 @@ function App() {
                       }
                     >
                       <span>Java</span>
-                      <span>Spring Framework</span>
-                      <span>MySQL</span>
+                      <span>Hibernate</span>
+                      <span>Springboot</span>
+                      <span>MSSQL</span>
                     </div>
                   </div>
                   <div className="flex gap-2">
@@ -308,7 +309,7 @@ function App() {
                         />
                       </span>
                       <span className="font-semibold">
-                        Network Configuration
+                        Other Tech
                       </span>
                     </div>
                     <div
@@ -319,9 +320,10 @@ function App() {
                           : "hidden"
                       }
                     >
-                      <span>CISCO Basic</span>
-                      <span>Network Configuration</span>
-                      <span>Routing and Switching</span>
+                      <span>Azure DevOps</span>
+                      <span>Openshift</span>
+                      <span>Podman</span>
+                      <span>Postman</span>
                     </div>
                   </div>
                   <div className="flex gap-2">
@@ -336,7 +338,7 @@ function App() {
                         />{" "}
                       </span>
                       <span className="font-semibold">
-                        Computer Troubleshooting
+                        Certification
                       </span>
                     </div>
                     <div
@@ -347,9 +349,7 @@ function App() {
                           : "hidden"
                       }
                     >
-                      <span>Active Directory</span>
-                      <span>Computer Setup</span>
-                      <span>LAN Setup</span>
+                      <span>AZ-900 Fundamentals Certified</span>
                       <span></span>
                     </div>
                   </div>
@@ -552,8 +552,7 @@ function App() {
                       <div className="px-5 flex flex-col text-white">
                         <span>Contact Address</span>
                         <span className="text-white text-opacity-80">
-                          Morning Glory St. Queens Row West Bacoor City, Cavite
-                          4102
+                          Bacoor Cavite, Philippines
                         </span>
                       </div>
                     </div>
@@ -562,20 +561,7 @@ function App() {
                         <span>Social Media</span>
                       </div>
                       <div className="flex gap-5">
-                        <div className="bg-white bg-opacity-10 rounded-full">
-                          <a
-                            href="https://www.facebook.com/ljymrnpscl"
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            <span>
-                              <AiFillFacebook
-                                size={50}
-                                className="p-2 text-blue-300"
-                              />
-                            </span>
-                          </a>
-                        </div>
+                      
                         <div className="bg-white bg-opacity-10 rounded-full">
                           <a
                             href="https://www.linkedin.com/in/aljay-pascual-54524717b/"
