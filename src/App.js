@@ -128,9 +128,7 @@ function App() {
       control.start("hidden4");
       setIsClick4(false);
      }
-   }, [control, inView4]);
-
-
+   }, [control, inView4]);   
 
   return (
     <div className="h-screen w-screen snap-y snap-mandatory overflow-scroll scrollbar-hide font-kanit">
@@ -180,23 +178,17 @@ function App() {
                 </div>
                 <p className="font-semibold text-xl">Software Engineer</p>
                 <p className="tracking-widest z-10">
-                Java Developer with expertise in Java 11 and 17,
-                Agile methodologies, and AZ-900 Azure
-                Fundamentals certification. Proven experience in
-                SQL, CI/CD with Azure DevOps, and
-                specialization in insurance solutions. Committed
-                to ongoing learning and delivering efficient,
-                industry-aligned applications.
+                Results-oriented software engineer with practical knowledge of Java and Spring Boot. Strong cloud and container orchestration skills are demonstrated by the Kubernetes Application Developer (CKAD) and Microsoft Azure Fundamentals (AZ-900) certifications. competent in scalable application design, development, and deployment with an emphasis on best practices and clean code. eager to work with dynamic development teams and offer technological skills. 
                 </p>
                 <a
                   href={resume}
-                  download="Pascual_Aljay_CV"
+                  download="Pascual_Aljay_Java_Developer"
                   target="_blank"
                   rel="noreferrer"
                 >
                   <div className="pt-10">
                     <span className="bg-white bg-opacity-10 p-3 px-7 rounded-3xl text-xl">
-                      get resume
+                      get resume 
                     </span>
                   </div>
                 </a>
@@ -349,7 +341,8 @@ function App() {
                           : "hidden"
                       }
                     >
-                      <span>AZ-900 Fundamentals Certified</span>
+                      <span>AZ-900</span>
+                      <span>CKAD</span>
                       <span></span>
                     </div>
                   </div>
