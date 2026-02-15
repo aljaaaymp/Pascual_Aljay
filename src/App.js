@@ -4,7 +4,7 @@ import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { DiJava } from "react-icons/di";
 import { IoLogoCss3 } from "react-icons/io";
-import { FaNetworkWired } from "react-icons/fa";
+import { FaNetworkWired, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { RiComputerLine } from "react-icons/ri";
 import { CiLocationOn } from "react-icons/ci";
 import resume from "../src/images/Pascual, Aljay_Java Developer.pdf";
@@ -15,16 +15,25 @@ import {
   AiFillLinkedin,
   AiFillGithub,
 } from "react-icons/ai";
+import PacmanLoader from "react-spinners/HashLoader";
+
+// IMAGES IMPORT
 import jchag2 from "../src/images/jchag2.PNG";
 import jchag from "../src/images/jchag.PNG";
 import isbn from "../src/images/ISBN.PNG";
 import nocoin from "../src/images/nocoin.png";
 import pas from "../src/images/PAS.PNG";
-import PacmanLoader from "react-spinners/HashLoader";
 import chicken from "../src/images/chicken.png";
 import lovester from "../src/images/lovester.png";
 
-
+// --- CONFIGURATION ---
+const PROJECTS = [
+  { id: 1, img: nocoin, url: "https://www.nocoin.ink/", title: "Nocoin" },
+  { id: 2, img: chicken, url: "https://www.r3tardedchicken.com/", title: "Chicken" },
+  { id: 3, img: lovester, url: "https://www.lovester.xyz/", title: "Lovester" },
+  { id: 5, img: jchag, url: "https://aljaaaymp.github.io/jchag/", title: "Church Website" },
+  { id: 6, img: isbn, url: "https://aljaaaymp.github.io/isbn/", title: "ISBN Tool" },
+];
 
 function App() {
   const [isClick, setIsClick] = useState(false);
@@ -32,69 +41,48 @@ function App() {
   const [isClick3, setIsClick3] = useState(false);
   const [isClick4, setIsClick4] = useState(false);
 
+  // Tech Stack States
   const [backEnd, setBackEnd] = useState(false);
   const [frontEnd, setFrontEnd] = useState(false);
   const [network, setNetwork] = useState(false);
   const [computer, setComputer] = useState(false);
   
-  // Set loading to true initially; no timer used
   const [loading, setLoading] = useState(true);
   const control = useAnimation();
 
-  // Animation Variants
-  const boxVariant = {
-    visible: { x: 0, opacity: 1, scale: 1, transition: { duration: 0.5 } },
-    hidden: { x: -1000, opacity: 0, scale: 1, transition: { duration: 0.1 } },
+  // --- CAROUSEL STATE ---
+  const [currAngle, setCurrAngle] = useState(0);
+  const radius = 300; 
+
+  const rotateCarousel = (direction) => {
+    const theta = 360 / PROJECTS.length;
+    if (direction === "next") {
+      setCurrAngle(currAngle - theta);
+    } else {
+      setCurrAngle(currAngle + theta);
+    }
   };
 
-  const boxVariant2 = {
-    visible2: { x: 0, opacity: 1, scale: 1, transition: { duration: 1.5 } },
-    hidden2: { x: -1000, opacity: 0, scale: 1, transition: { duration: 0.1 } },
+  // Simple Fade Animation for Content
+  const contentVariants = {
+    hidden: { opacity: 0, x: 50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.5, delay: 0.2 } },
   };
 
-  const boxVariant3 = {
-    visible3: { x: 0, opacity: 1, scale: 1, transition: { duration: 1.5 } },
-    hidden3: { x: -1000, opacity: 0, scale: 1, transition: { duration: 0.1 } },
-  };
-  const boxVariant4 = {
-    visible4: { x: 0, opacity: 1, scale: 1, transition: { duration: 1.5 } },
-    hidden4: { x: -1000, opacity: 0, scale: 1, transition: { duration: 0.1 } },
-  };
-
+  // Intersection Observers
   const [ref, inView] = useInView({ threshold: 0.2 });
   const [ref2, inView2] = useInView({ threshold: 0.2 });
   const [ref3, inView3] = useInView({ threshold: 0.2 });
   const [ref4, inView4] = useInView({ threshold: 0.2 });
 
-  // Intersection Observers
   useEffect(() => {
     if (inView) control.start("visible");
-    else { control.start("hidden"); setIsClick(false); }
   }, [control, inView]);
 
-  useEffect(() => {
-    if (inView2) control.start("visible2");
-    else {
-      control.start("hidden2");
-      setIsClick2(false);
-      setBackEnd(false); setFrontEnd(false); setComputer(false); setNetwork(false);
-    }
-  }, [control, inView2]);
-
-  useEffect(() => {
-    if (inView3) control.start("visible3");
-    else { control.start("hidden3"); setIsClick3(false); }
-  }, [control, inView3]);
-
-  useEffect(() => {
-    if (inView4) control.start("visible4");
-    else { control.start("hidden4"); setIsClick4(false); }
-  }, [control, inView4]);
-
   return (
-    <div className="h-screen w-screen snap-y snap-mandatory overflow-scroll scrollbar-hide font-kanit relative">
+    <div className="h-screen w-screen snap-y snap-mandatory overflow-x-hidden overflow-y-scroll scrollbar-hide font-kanit relative bg-black text-white">
       
-      {/* GLOBAL LOADER OVERLAY: Driven by Spline onLoad */}
+      {/* LOADER */}
       {loading && (
         <div className="fixed inset-0 z-[999] flex flex-col justify-center items-center bg-black">
           <PacmanLoader color="#36d7b7" size={100} />
@@ -102,195 +90,243 @@ function App() {
         </div>
       )}
 
-      <div className="flex flex-col justify-center items-center bg-black">
+      {/* --- SECTION 1: ABOUT ME --- */}
+      <div id="aboutme" ref={ref} className="h-screen w-screen snap-start relative overflow-hidden">
         
-        {/* ABOUT ME SECTION */}
-        <div id="aboutme" ref={ref} className={isClick ? "bg-black flex w-screen h-auto md:h-screen md:flex-row flex-col -mt-20 md:mt-0 items-center justify-start snap-start" : "flex w-screen h-screen md:flex-row flex-col items-center justify-center bg-black snap-start"}>
-          <motion.div
-            variants={boxVariant}
-            initial="hidden"
-            animate={control}
-            onClick={() => setIsClick(true)}
-            className="h-5/6 w-screen md:w-3/6 bg-black mt-5 md:mt-20 cursor-pointer"
-          >
-            <Spline
-              className="cursor-pointer"
-              scene="https://prod.spline.design/SBV9rDJLX3pIFpkC/scene.splinecode"
-              onLoad={() => setLoading(false)}
-            />
-          </motion.div>
-          <div className={isClick ? "text-white flex gap-5 px-5 md:px-20 flex-col w-screen md:w-1/2 animate-entrance" : "hidden"}>
-            <div className="flex justify-between">
-              <div><span className="text-5xl font-bold">Aljay Pascual</span></div>
-              <div onClick={() => setIsClick(false)} className="-mt-10 hover:cursor-pointer hover:animate-close"><AiFillCloseCircle size={80} /></div>
+        {/* 3D BACKGROUND LAYER (Always Full Screen, Shifts Left on Click) */}
+        <div className={`absolute inset-0 w-full h-full transition-transform duration-700 ease-in-out z-0 ${isClick ? "-translate-x-[25%]" : "translate-x-0"}`}>
+            <div className="w-full h-full cursor-pointer" onClick={() => setIsClick(true)}>
+                <Spline 
+                    scene="https://prod.spline.design/SBV9rDJLX3pIFpkC/scene.splinecode"
+                    onLoad={() => setLoading(false)}
+                />
             </div>
-            <p className="font-semibold text-xl">Software Engineer</p>
-            <p className="tracking-widest z-10">
-              Results-oriented software engineer with practical knowledge of Java and Spring Boot. Strong cloud and container orchestration skills are demonstrated by the Kubernetes Application Developer (CKAD) and Microsoft Azure Fundamentals (AZ-900) certifications. competent in scalable application design, development, and deployment with an emphasis on best practices and clean code. eager to work with dynamic development teams and offer technological skills. 
-            </p>
-            <a href={resume} download="Pascual_Aljay_Java_Developer" target="_blank" rel="noreferrer">
-              <div className="pt-10"><span className="bg-white bg-opacity-10 p-3 px-7 rounded-3xl text-xl">get resume</span></div>
-            </a>
-          </div>
+            {/* Hint Text */}
+            {!isClick && !loading && (
+                <div className="absolute bottom-20 left-0 right-0 text-center pointer-events-none animate-bounce">
+                    <p className="text-xl font-bold tracking-widest uppercase opacity-70">Click to Explore</p>
+                </div>
+            )}
         </div>
 
-        {/* SKILLS SECTION*/}
-        <div id="skills" ref={ref2} className={isClick2 ? "bg-black flex w-screen h-auto md:h-screen md:flex-row flex-col -mt-20 md:mt-0 items-center justify-center snap-start" : "flex w-screen h-screen md:flex-row flex-col items-center justify-center bg-black snap-start"}>
-          <motion.div variants={boxVariant2} initial="hidden2" animate={control} onClick={() => setIsClick2(true)} className="h-5/6 w-screen md:w-3/6 bg-black mt-5 md:mt-20">
-            <Spline className="hover:cursor-pointer" scene="https://prod.spline.design/F9v0bKaC-QNOR-V7/scene.splinecode" />
-          </motion.div>
-          <div className={isClick2 ? "text-white flex gap-2 px-5 md:px-20 flex-col w-screen md:w-1/2 animate-entrance" : "hidden"}>
-            <div className="flex justify-between">
-              <div><span className="text-5xl font-bold">My Skills</span></div>
-              <div onClick={() => setIsClick2(false)} className="-mt-10 hover:cursor-pointer hover:animate-close"><AiFillCloseCircle size={80} /></div>
+        {/* CONTENT LAYER (Right Side Overlay) */}
+        {isClick && (
+            <motion.div 
+                initial="hidden" animate="visible" variants={contentVariants}
+                className="absolute top-0 right-0 h-full w-full md:w-1/2 bg-black/90 backdrop-blur-sm z-10 flex flex-col justify-center p-10 md:p-20 shadow-2xl"
+            >
+                <div className="flex justify-between items-start mb-5">
+                    <h1 className="text-5xl font-bold">Aljay Pascual</h1>
+                    <AiFillCloseCircle size={40} className="cursor-pointer hover:text-red-500 transition-colors" onClick={() => setIsClick(false)} />
+                </div>
+                <p className="text-xl font-semibold text-gray-400 mb-5">Software Engineer</p>
+                <p className="tracking-wide text-gray-300 mb-8 leading-relaxed">
+                     Results-oriented software engineer with practical knowledge of Java and Spring Boot. Strong cloud and container orchestration skills are demonstrated by the Kubernetes Application Developer (CKAD) and Microsoft Azure Fundamentals (AZ-900) certifications. competent in scalable application design, development, and deployment with an emphasis on best practices and clean code. eager to work with dynamic development teams and offer technological skills.
+                </p>
+                <a href={resume} download="Pascual_Aljay_Java_Developer" target="_blank" rel="noreferrer">
+                    <button className="border border-white/20 hover:bg-white/10 px-8 py-3 rounded-full text-lg transition-all">
+                        Get Resume
+                    </button>
+                </a>
+            </motion.div>
+        )}
+      </div>
+
+
+      {/* --- SECTION 2: SKILLS --- */}
+      <div id="skills" ref={ref2} className="h-screen w-screen snap-start relative overflow-hidden">
+         {/* 3D BACKGROUND (Slides Left) */}
+         <div className={`absolute inset-0 w-full h-full transition-transform duration-700 ease-in-out z-0 ${isClick2 ? "-translate-x-[25%]" : "translate-x-0"}`}>
+             <div className="w-full h-full cursor-pointer" onClick={() => setIsClick2(true)}>
+                <Spline scene="https://prod.spline.design/F9v0bKaC-QNOR-V7/scene.splinecode" />
+             </div>
+         </div>
+
+         {/* CONTENT LAYER */}
+         {isClick2 && (
+            <motion.div 
+                initial="hidden" animate="visible" variants={contentVariants}
+                className="absolute top-0 right-0 h-full w-full md:w-1/2 bg-black/95 backdrop-blur-md z-10 flex flex-col justify-center p-5 md:p-20 shadow-2xl overflow-y-auto"
+            >
+              <div className="flex justify-between items-center mb-10">
+                <span className="text-4xl md:text-5xl font-bold">My Skills</span>
+                <AiFillCloseCircle size={40} className="cursor-pointer hover:text-red-500" onClick={() => setIsClick2(false)} />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* BackEnd */}
+                <div className="flex flex-col gap-2">
+                   <div onClick={() => setBackEnd(!backEnd)} className={`p-4 rounded-xl border border-white/10 cursor-pointer hover:bg-white/5 transition-all flex flex-col items-center ${backEnd ? 'bg-white/10' : ''}`}>
+                      <DiJava className="text-fuchsia-700 mb-2" size={40} />
+                      <span className="font-semibold">Back End</span>
+                   </div>
+                   {backEnd && <div className="p-3 text-sm text-gray-300 border-l-2 border-fuchsia-700 animate-fadeIn">Java, Springboot, Maven, JUnit</div>}
+                </div>
+
+                {/* FrontEnd */}
+                <div className="flex flex-col gap-2">
+                   <div onClick={() => setFrontEnd(!frontEnd)} className={`p-4 rounded-xl border border-white/10 cursor-pointer hover:bg-white/5 transition-all flex flex-col items-center ${frontEnd ? 'bg-white/10' : ''}`}>
+                      <IoLogoCss3 className="text-blue-500 mb-2" size={40} />
+                      <span className="font-semibold">Front End</span>
+                   </div>
+                   {frontEnd && <div className="p-3 text-sm text-gray-300 border-l-2 border-blue-500 animate-fadeIn">React, Tailwind, CSS, HTML</div>}
+                </div>
+
+                {/* Network */}
+                <div className="flex flex-col gap-2">
+                   <div onClick={() => setNetwork(!network)} className={`p-4 rounded-xl border border-white/10 cursor-pointer hover:bg-white/5 transition-all flex flex-col items-center ${network ? 'bg-white/10' : ''}`}>
+                      <FaNetworkWired className="text-green-500 mb-2" size={40} />
+                      <span className="font-semibold">DevOps / Tools</span>
+                   </div>
+                   {network && <div className="p-3 text-sm text-gray-300 border-l-2 border-green-500 animate-fadeIn">Azure DevOps, Oracle SQL, Kibana</div>}
+                </div>
+
+                {/* Certs */}
+                <div className="flex flex-col gap-2">
+                   <div onClick={() => setComputer(!computer)} className={`p-4 rounded-xl border border-white/10 cursor-pointer hover:bg-white/5 transition-all flex flex-col items-center ${computer ? 'bg-white/10' : ''}`}>
+                      <RiComputerLine className="text-yellow-500 mb-2" size={40} />
+                      <span className="font-semibold">Certifications</span>
+                   </div>
+                   {computer && <div className="p-3 text-sm text-gray-300 border-l-2 border-yellow-500 animate-fadeIn">AZ-900, CKAD</div>}
+                </div>
+              </div>
+            </motion.div>
+         )}
+      </div>
+
+
+      {/* --- SECTION 3: SAMPLE WORKS (THE FIX) --- */}
+      <div id="works" ref={ref3} className="h-screen w-screen snap-start relative overflow-hidden bg-black">
+        
+        {/* 3D LAYER - SLIDES LEFT, NEVER SHRINKS */}
+        <div className={`absolute inset-0 w-full h-full transition-transform duration-700 ease-in-out z-0 ${isClick3 ? "-translate-x-[20%]" : "translate-x-0"}`}>
+            <div className="w-full h-full cursor-pointer flex items-center justify-center" onClick={() => !isClick3 && setIsClick3(true)}>
+                <Spline scene="https://prod.spline.design/pM2pK3ckYG7I8mCw/scene.splinecode" />
             </div>
             
-            <div className="flex flex-col md:flex-row gap-2">
-              <div className="flex gap-2">
-                <div onClick={() => setBackEnd(true)} className="h-40 w-40 bg-white bg-opacity-10 flex flex-col justify-center items-center text-center rounded-xl hover:cursor-pointer">
-                  <span><DiJava className="text-fuchsia-700" size={50} /></span>
-                  <span className="font-semibold">Back End Development</span>
+             {/* Title when inactive */}
+             {!isClick3 && (
+                <div className="absolute top-20 left-0 right-0 text-center pointer-events-none">
+                     <h2 className="text-5xl font-bold text-white drop-shadow-lg">Sample Works</h2>
+                     <p className="text-gray-400 mt-2 animate-pulse">Click Ironman to Open</p>
                 </div>
-                <div onClick={() => setBackEnd(false)} className={backEnd ? "h-40 w-40 border-white border-2 p-2 border-opacity-10 flex flex-col justify-center rounded-xl animate-entrance2" : "hidden"}>
-                  <span>Java</span><span>Springboot</span><span>Maven</span><span>Junit</span>
-                </div>
-              </div>
-              <div className="flex gap-2">
-                <div onClick={() => setFrontEnd(true)} className="h-40 w-40 bg-white bg-opacity-10 flex flex-col justify-center items-center text-center rounded-xl hover:cursor-pointer">
-                  <span><IoLogoCss3 className="text-fuchsia-700" size={50} /></span>
-                  <span className="font-semibold">Front End Development</span>
-                </div>
-                <div onClick={() => setFrontEnd(false)} className={frontEnd ? "h-40 w-40 border-white border-2 p-2 border-opacity-10 flex flex-col rounded-xl justify-center animate-entrance2 " : "hidden"}>
-                  <span>CSS</span><span>HTML</span><span>React JS</span><span>Tailwind</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-col md:flex-row gap-2">
-              <div className="flex gap-2">
-                <div onClick={() => setNetwork(true)} className="h-40 w-40 bg-white bg-opacity-10 flex flex-col justify-center items-center text-center rounded-xl hover:cursor-pointer">
-                  <span><FaNetworkWired className="text-fuchsia-700" size={50} /></span>
-                  <span className="font-semibold">Other Tech</span>
-                </div>
-                <div onClick={() => setNetwork(false)} className={network ? "h-40 w-40 border-white border-2 p-2 border-opacity-10 flex flex-col justify-center rounded-xl animate-entrance2" : "hidden"}>
-                  <span>Azure DevOps</span><span>Oracle SQL</span><span>Azure Devops</span><span>Kibana</span>
-                </div>
-              </div>
-              <div className="flex gap-2">
-                <div onClick={() => setComputer(true)} className="h-40 w-40 bg-white bg-opacity-10 flex flex-col justify-center items-center text-center rounded-xl hover:cursor-pointer">
-                  <span><RiComputerLine className="text-fuchsia-700" size={50} /></span>
-                  <span className="font-semibold">Certification</span>
-                </div>
-                <div onClick={() => setComputer(false)} className={computer ? "h-40 w-40 border-white border-2 p-2 border-opacity-10 flex flex-col rounded-xl justify-center animate-entrance2" : "hidden"}>
-                  <span>AZ-900</span><span>CKAD</span>
-                </div>
-              </div>
-            </div>
-          </div>
+             )}
         </div>
 
-        {/* SAMPLE WORKS SECTION*/}
-        <div id="works" ref={ref3} className={isClick3 ? "bg-black flex w-screen h-auto md:h-screen md:flex-row flex-col -mt-20 md:mt-0 items-center justify-center snap-start" : "flex w-screen h-screen md:flex-row flex-col items-center justify-center bg-black snap-start"}>
-          <motion.div animate={control} variants={boxVariant3} initial="hidden3" onClick={() => setIsClick3(true)} className="h-5/6 w-screen md:w-3/6 bg-black">
-            <Spline className="hover:cursor-pointer" scene="https://prod.spline.design/pM2pK3ckYG7I8mCw/scene.splinecode" />
-          </motion.div>
-          <div className={isClick3 ? "text-white flex gap-2 md:px-20 flex-col w-screen md:w-1/2 animate-entrance" : "hidden"}>
-            <div className="flex justify-between">
-              <div><span className="text-5xl font-bold">Sample Works</span></div>
-              <div onClick={() => setIsClick3(false)} className="-mt-10 hover:cursor-pointer hover:animate-close"><AiFillCloseCircle size={80} /></div>
-            </div>
+        {/* CAROUSEL LAYER (Overlay on the Right) */}
+        {isClick3 && (
+            <motion.div 
+                initial={{ opacity: 0, x: 100 }} 
+                animate={{ opacity: 1, x: 0 }} 
+                transition={{ duration: 0.7 }}
+                className="absolute top-0 right-0 h-full w-full md:w-[60%] z-10 flex flex-col items-center justify-center perspective-container"
+            >
+                {/* Close Button */}
+                <div className="absolute top-10 right-10 z-[60] cursor-pointer hover:text-red-500 transition-colors" onClick={() => setIsClick3(false)}>
+                    <AiFillCloseCircle size={50} />
+                </div>
 
-            <div className="flex flex-col gap-10 py-5 h-[450px] overflow-y-auto scrollbar-hide mt-5">
-              
-              <div className="flex gap-2 md:gap-10">
-                <div className="h-52 w-52 bg-white bg-opacity-10 flex justify-center items-center rounded-xl hover:cursor-pointer">
-                  <a href="https://www.nocoin.ink/" target="_blank" rel="noreferrer">
-                    <img src={nocoin} alt="Nocoin" className="h-full w-full p-5 hover:animate-scale-center" />
-                  </a>
+                {/* 3D Carousel Ring */}
+                <div className="relative w-full h-[600px] flex items-center justify-center" style={{ perspective: "1000px" }}>
+                    <div 
+                        className="absolute w-full h-full flex items-center justify-center"
+                        style={{
+                            transformStyle: "preserve-3d",
+                            transform: `rotateY(${currAngle}deg)`,
+                            transition: "transform 1s cubic-bezier(0.25, 1, 0.5, 1)"
+                        }}
+                    >
+                        {PROJECTS.map((project, index) => {
+                             const theta = (360 / PROJECTS.length) * index;
+                             return (
+                               <div
+                                 key={project.id}
+                                 className="absolute bg-white/10 border border-white/20 p-4 rounded-xl backdrop-blur-md hover:bg-white/20 hover:border-blue-400 transition-all group cursor-pointer shadow-lg"
+                                 style={{
+                                   width: "240px",
+                                   height: "200px",
+                                   // Rotate to position in circle, push out by radius
+                                   transform: `rotateY(${theta}deg) translateZ(${radius}px)`,
+                                 }}
+                               >
+                                 <a href={project.url} target="_blank" rel="noreferrer" className="w-full h-full flex flex-col items-center justify-center">
+                                    <img src={project.img} alt={project.title} className="h-24 object-contain mb-4 group-hover:scale-110 transition-transform" />
+                                    <span className="font-bold text-xl tracking-wide">{project.title}</span>
+                                    <span className="text-xs text-blue-300 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Visit Site</span>
+                                 </a>
+                               </div>
+                             );
+                        })}
+                    </div>
                 </div>
-                <div className="h-52 w-52 bg-white bg-opacity-10 flex justify-center items-center rounded-xl hover:cursor-pointer">
-                  <a href="https://www.r3tardedchicken.com/" target="_blank" rel="noreferrer">
-                    <img src={chicken} alt="Retarded Chicken" className="h-full w-full p-5 hover:animate-scale-center" />
-                  </a>
-                </div>
-              </div>
 
-              <div className="flex gap-2 md:gap-10">
-                <div className="h-52 w-52 bg-white bg-opacity-10 flex justify-center items-center rounded-xl hover:cursor-pointer">
-                  <a href="https://www.lovester.xyz/" target="_blank" rel="noreferrer">
-                    <img src={lovester} alt="Lovester" className="h-full w-full p-5 hover:animate-scale-center" />
-                  </a>
+                {/* Controls */}
+                <div className="absolute bottom-20 flex gap-8 z-50">
+                   <button onClick={() => rotateCarousel("prev")} className="bg-white/10 hover:bg-blue-500/50 text-white p-4 rounded-full backdrop-blur-md border border-white/20 transition-all">
+                      <FaChevronLeft size={24} />
+                   </button>
+                   <button onClick={() => rotateCarousel("next")} className="bg-white/10 hover:bg-blue-500/50 text-white p-4 rounded-full backdrop-blur-md border border-white/20 transition-all">
+                      <FaChevronRight size={24} />
+                   </button>
                 </div>
-                <div className="h-52 w-52 bg-white bg-opacity-10 flex justify-center items-center rounded-xl hover:cursor-pointer">
-                  <a href="https://www.jchagm.org" target="_blank" rel="noreferrer">
-                    <img src={jchag2} alt="jchag2" className="h-full w-full p-5 hover:animate-scale-center" />
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex gap-2 md:gap-10">
-                <div className="h-52 w-52 bg-white bg-opacity-10 flex justify-center items-center rounded-xl hover:cursor-pointer">
-                  <a href="https://aljaaaymp.github.io/jchag/" target="_blank" rel="noreferrer">
-                    <img src={jchag} alt="movie" className="h-full w-full p-5 hover:animate-scale-center" />
-                  </a>
-                </div>
-                <div className="h-52 w-52 bg-white bg-opacity-10 flex justify-center items-center rounded-xl hover:cursor-pointer">
-                  <a href="https://aljaaaymp.github.io/isbn/" target="_blank" rel="noreferrer">
-                    <img src={isbn} alt="isbn" className="h-full w-full p-5 hover:animate-scale-center" />
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex gap-2 md:gap-10">
-                <div className="h-52 w-52 bg-white bg-opacity-10 flex justify-center items-center rounded-xl hover:cursor-pointer">
-                  <a href="https://aljaaaymp.github.io/PolicyAdministrationSystem/" target="_blank" rel="noreferrer">
-                    <img src={pas} alt="pas" className="h-full w-full p-5 hover:animate-scale-center" />
-                  </a>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        {/* CONTACT SECTION */}
-        <div id="contact" ref={ref4} className={isClick4 ? "bg-black flex w-screen h-auto md:h-screen md:flex-row flex-col -mt-20 md:mt-0 items-center justify-center snap-start" : "flex w-screen h-screen md:flex-row flex-col items-center justify-center bg-black snap-start"}>
-          <motion.div animate={control} variants={boxVariant4} initial="hidden4" onClick={() => setIsClick4(true)} className="h-5/6 w-screen md:w-3/6 bg-black">
-            <Spline className="hover:cursor-pointer" scene="https://prod.spline.design/vBs4ZVL7rLdAaaal/scene.splinecode" />
-          </motion.div>
-          <div className={isClick4 ? "text-white flex gap-2 px-5 md:px-20 flex-col w-screen md:w-2/3 animate-entrance" : "hidden"}>
-            <div className="flex justify-between">
-              <div><span className="text-5xl font-bold">Contact Me</span></div>
-              <div onClick={() => setIsClick4(false)} className="-mt-10 hover:cursor-pointer hover:animate-close"><AiFillCloseCircle size={80} /></div>
-            </div>
-            <div className="flex flex-col gap-2 md:gap-10 py-5">
-              <div className="flex md:flex-row flex-col gap-2 md:gap-10">
-                <div className="h-32 w-96 bg-white bg-opacity-5 flex justify-start px-10 items-center rounded-xl">
-                  <div className="bg-white bg-opacity-10 rounded-full"><span><AiOutlinePhone size={50} className="p-1 text-blue-300" /></span></div>
-                  <div className="px-5 flex flex-col"><span>Contact on Phone</span><span className="text-opacity-80">0945 801 9502</span></div>
-                </div>
-                <div className="bg-white bg-opacity-5 h-32 w-96 flex flex-row items-center px-5 rounded-lg">
-                  <div className="bg-white bg-opacity-10 rounded-full"><span><AiOutlineMail size={50} className="p-1 text-blue-300" /></span></div>
-                  <div className="px-5 flex flex-col"><span>Contact on Email</span><span className="text-opacity-80">pascualaljay@gmail.com</span></div>
-                </div>
-              </div>
-              <div className="flex md:flex-row flex-col gap-2 md:gap-10">
-                <div className="bg-white bg-opacity-5 h-32 w-96 flex flex-row items-center px-5 rounded-lg">
-                  <div className="bg-white bg-opacity-10 rounded-full"><span><CiLocationOn size={50} className="p-1 text-blue-300" /></span></div>
-                  <div className="px-5 flex flex-col"><span>Contact Address</span><span className="text-opacity-80">Bacoor Cavite, Philippines</span></div>
-                </div>
-                <div className="bg-white bg-opacity-5 h-32 w-96 flex justify-center items-center gap-2 text-white flex-col">
-                  <div><span>Social Media</span></div>
-                  <div className="flex gap-5">
-                    <div className="bg-white bg-opacity-10 rounded-full"><a href="https://www.linkedin.com/in/aljay-pascual-54524717b/" target="_blank" rel="noreferrer"><AiFillLinkedin size={50} className="p-2 text-blue-300" /></a></div>
-                    <div className="bg-white bg-opacity-10 rounded-full"><a href="https://github.com/aljaaaymp" target="_blank" rel="noreferrer"><AiFillGithub size={50} className="p-2 text-blue-300" /></a></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+            </motion.div>
+        )}
       </div>
+
+
+      {/* --- SECTION 4: CONTACT --- */}
+      <div id="contact" ref={ref4} className="h-screen w-screen snap-start relative overflow-hidden">
+         <div className={`absolute inset-0 w-full h-full transition-transform duration-700 ease-in-out z-0 ${isClick4 ? "-translate-x-[25%]" : "translate-x-0"}`}>
+             <div className="w-full h-full cursor-pointer" onClick={() => setIsClick4(true)}>
+                <Spline scene="https://prod.spline.design/vBs4ZVL7rLdAaaal/scene.splinecode" />
+             </div>
+         </div>
+
+         {isClick4 && (
+             <motion.div 
+                initial="hidden" animate="visible" variants={contentVariants}
+                className="absolute top-0 right-0 h-full w-full md:w-1/2 bg-black/90 backdrop-blur-sm z-10 flex flex-col justify-center p-10 md:p-20 shadow-2xl"
+             >
+                <div className="flex justify-between items-center mb-10">
+                  <span className="text-4xl md:text-5xl font-bold">Contact Me</span>
+                  <AiFillCloseCircle size={40} className="cursor-pointer hover:text-red-500" onClick={() => setIsClick4(false)} />
+                </div>
+                
+                <div className="space-y-8">
+                   <div className="flex items-center gap-5 p-5 bg-white/5 rounded-xl border border-white/5 hover:border-blue-400/30 transition-colors">
+                      <AiOutlinePhone size={30} className="text-blue-400" />
+                      <div>
+                        <p className="text-sm text-gray-400">Phone</p>
+                        <p className="text-lg font-medium">0945 801 9502</p>
+                      </div>
+                   </div>
+                   <div className="flex items-center gap-5 p-5 bg-white/5 rounded-xl border border-white/5 hover:border-blue-400/30 transition-colors">
+                      <AiOutlineMail size={30} className="text-blue-400" />
+                      <div>
+                        <p className="text-sm text-gray-400">Email</p>
+                        <p className="text-lg font-medium">pascualaljay@gmail.com</p>
+                      </div>
+                   </div>
+                   <div className="flex items-center gap-5 p-5 bg-white/5 rounded-xl border border-white/5 hover:border-blue-400/30 transition-colors">
+                      <CiLocationOn size={30} className="text-blue-400" />
+                      <div>
+                        <p className="text-sm text-gray-400">Address</p>
+                        <p className="text-lg font-medium">Bacoor Cavite, Philippines</p>
+                      </div>
+                   </div>
+                   <div className="flex gap-4 mt-5">
+                      <a href="https://www.linkedin.com/in/aljay-pascual-54524717b/" target="_blank" rel="noreferrer" className="bg-white/10 p-4 rounded-full hover:bg-blue-600 transition-all">
+                        <AiFillLinkedin size={30} />
+                      </a>
+                      <a href="https://github.com/aljaaaymp" target="_blank" rel="noreferrer" className="bg-white/10 p-4 rounded-full hover:bg-gray-700 transition-all">
+                        <AiFillGithub size={30} />
+                      </a>
+                   </div>
+                </div>
+             </motion.div>
+         )}
+      </div>
+
     </div>
   );
 }
