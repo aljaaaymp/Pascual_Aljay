@@ -1,29 +1,29 @@
 {
   "files": {
-    "main.css": "/Pascual_Aljay/static/css/main.8695abd1.css",
-    "main.js": "/Pascual_Aljay/static/js/main.2ca973c5.js",
+    "main.css": "/Pascual_Aljay/static/css/main.b1dbaf63.css",
+    "main.js": "/Pascual_Aljay/static/js/main.2c3c750e.js",
     "static/js/227.63a4b981.chunk.js": "/Pascual_Aljay/static/js/227.63a4b981.chunk.js",
     "static/js/526.369ddfc5.chunk.js": "/Pascual_Aljay/static/js/526.369ddfc5.chunk.js",
     "static/js/232.2ab67488.chunk.js": "/Pascual_Aljay/static/js/232.2ab67488.chunk.js",
     "static/js/237.b2c7a1ef.chunk.js": "/Pascual_Aljay/static/js/237.b2c7a1ef.chunk.js",
     "static/media/jchag.PNG": "/Pascual_Aljay/static/media/jchag.c5e905e213b6a6383a0e.PNG",
     "static/media/Pascual, Aljay_Java Developer.pdf": "/Pascual_Aljay/static/media/Pascual, Aljay_Java Developer.32bb02046ff3c32a8f4f.pdf",
-    "static/media/jchag2.PNG": "/Pascual_Aljay/static/media/jchag2.d6224e7197c31ff71595.PNG",
+    "static/media/alien.png": "/Pascual_Aljay/static/media/alien.6db30b3d21a0d2ec2e6a.png",
     "static/media/ISBN.PNG": "/Pascual_Aljay/static/media/ISBN.58bf2250cb5cb06f9f22.PNG",
     "static/media/lovester.png": "/Pascual_Aljay/static/media/lovester.c76f5532e0cb70c8d6f5.png",
     "static/media/chicken.png": "/Pascual_Aljay/static/media/chicken.0720725b40a0a9a0abc4.png",
-    "static/media/PAS.PNG": "/Pascual_Aljay/static/media/PAS.cbf8056eed0913b3acf0.PNG",
+    "static/media/claude.png": "/Pascual_Aljay/static/media/claude.2bdb52d1645e0aa0cccf.png",
     "static/media/nocoin.png": "/Pascual_Aljay/static/media/nocoin.6ead0ee315f578febcd9.png",
     "index.html": "/Pascual_Aljay/index.html",
-    "main.8695abd1.css.map": "/Pascual_Aljay/static/css/main.8695abd1.css.map",
-    "main.2ca973c5.js.map": "/Pascual_Aljay/static/js/main.2ca973c5.js.map",
+    "main.b1dbaf63.css.map": "/Pascual_Aljay/static/css/main.b1dbaf63.css.map",
+    "main.2c3c750e.js.map": "/Pascual_Aljay/static/js/main.2c3c750e.js.map",
     "227.63a4b981.chunk.js.map": "/Pascual_Aljay/static/js/227.63a4b981.chunk.js.map",
     "526.369ddfc5.chunk.js.map": "/Pascual_Aljay/static/js/526.369ddfc5.chunk.js.map",
     "232.2ab67488.chunk.js.map": "/Pascual_Aljay/static/js/232.2ab67488.chunk.js.map",
     "237.b2c7a1ef.chunk.js.map": "/Pascual_Aljay/static/js/237.b2c7a1ef.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8695abd1.css",
-    "static/js/main.2ca973c5.js"
+    "static/css/main.b1dbaf63.css",
+    "static/js/main.2c3c750e.js"
   ]
 }
