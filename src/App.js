@@ -25,14 +25,19 @@ import nocoin from "../src/images/nocoin.png";
 import pas from "../src/images/PAS.PNG";
 import chicken from "../src/images/chicken.png";
 import lovester from "../src/images/lovester.png";
+import alien from "../src/images/lovester.png";
+import claude from "../src/images/lovester.png";
 
 // --- CONFIGURATION ---
 const PROJECTS = [
-  { id: 1, img: nocoin, url: "https://www.nocoin.ink/", title: "Nocoin" },
-  { id: 2, img: chicken, url: "https://www.r3tardedchicken.com/", title: "Chicken" },
-  { id: 3, img: lovester, url: "https://www.lovester.xyz/", title: "Lovester" },
-  { id: 5, img: jchag, url: "https://aljaaaymp.github.io/jchag/", title: "Church Website" },
-  { id: 6, img: isbn, url: "https://aljaaaymp.github.io/isbn/", title: "ISBN Tool" },
+  { id: 1, img: claude, url: "https://www.claudemetahunter.online/", title: "Claude AI" },
+  { id: 2, img: alien, url: "https://www.neilarmstrong.fun/", title: "Alien Token" },
+  { id: 3, img: nocoin, url: "https://www.nocoin.ink/", title: "Nocoin" },
+  { id: 4, img: chicken, url: "https://www.r3tardedchicken.com/", title: "Chicken" },
+  { id: 5, img: lovester, url: "https://www.lovester.xyz/", title: "Lovester" },
+  { id: 6, img: jchag, url: "https://aljaaaymp.github.io/jchag/", title: "Church Website" },
+  { id: 7, img: isbn, url: "https://aljaaaymp.github.io/isbn/", title: "ISBN Tool" },
+
 ];
 
 function App() {
